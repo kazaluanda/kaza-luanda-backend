@@ -34,6 +34,10 @@ app.use("/api/residencias", residenciaRoutes);
 const path = require("path");
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Chamada para rotas de agendamento 
+const agendamentoRoutes = require('./routes/agendamentoRoutes');
+app.use('/api/agendamentos', agendamentoRoutes);
+
 // Porta
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
