@@ -22,13 +22,17 @@ app.get("/", (req, res) => {
   res.send("API Kaza Luanda funcionando!");
 });
 
-// app.js (com trecho adicionado)
-const authRoutes = require('./routes/authRoutes');
-app.use('/api/auth', authRoutes);
+// App.js (com trecho adicionado)
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
 
-// mais alterações
-const residenciaRoutes = require('./routes/residenciaRoutes');
-app.use('/api/residencias', residenciaRoutes);
+// Mais alterações
+const residenciaRoutes = require("./routes/residenciaRoutes");
+app.use("/api/residencias", residenciaRoutes);
+
+// Servir arquivos de imagem estaticamente
+const path = require("path");
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Porta
 const PORT = process.env.PORT || 5000;
