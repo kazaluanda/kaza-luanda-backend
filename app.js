@@ -22,6 +22,14 @@ app.get("/", (req, res) => {
   res.send("API Kaza Luanda funcionando!");
 });
 
+// app.js (com trecho adicionado)
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
+
+// mais alterações
+const residenciaRoutes = require('./routes/residenciaRoutes');
+app.use('/api/residencias', residenciaRoutes);
+
 // Porta
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
