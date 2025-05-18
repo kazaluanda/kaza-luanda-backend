@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const permitidos = require('../middleware/roles');
 const {
   criarAgendamento,
   listarMeusAgendamentos,
@@ -12,8 +13,8 @@ const {
 router.post('/', auth, criarAgendamento);
 router.get('/meus', auth, listarMeusAgendamentos);
 
-// Gestor (rotas protegidas por função futuramente)
-router.get('/', auth, listarTodos);
-router.put('/:id/status', auth, atualizarStatus);
+// Somente gestor ou admin pode ver e aprovar agendamentos
+router.get('/', auth, permitidos('gestor', 'admin'), listarTodos);
+router.put('/:id/status', auth, permitidos('gestor', 'admin'), atualizarStatus);
 
 module.exports = router;
